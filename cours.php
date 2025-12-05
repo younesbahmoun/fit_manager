@@ -1,3 +1,6 @@
+<?php
+require "connection.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -88,8 +91,41 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <?php
+                        $sql = "SELECT * FROM cours";
+                        $result = $connection->query($sql);
+
+                        if (!$result) {
+                            $errorMessage = "Invalid query: " . $connection->error;
+                            exit;
+                        }
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "
+                                <tr>
+                                    <td>$row[nom]</td>
+                                    <td><span class='badge badge-primary'>$row[categorie]</span></td>
+                                    <td>$row[date_cours]</td>
+                                    <td>08:00</td>
+                                    <td>$row[duree] min</td>
+                                    <td>$row[max_participants]</td>
+                                    <td>15 (75%)</td>
+                                    <td class='actions'>
+                                        <a href='edit_cours.php?id=1' class='action-btn edit'>
+                                            <i class='fas fa-edit'></i> Modifier
+                                        </a>
+                                        <a href='delete_cours.php?id=1' class='action-btn delete'>
+                                            <i class='fas fa-trash'></i> Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            ";
+                        }
+                        ?>
+
                         <!-- Exemple de données statiques -->
-                        <tr>
+                        <!-- <tr>
                             <td>Yoga Matinal</td>
                             <td><span class="badge badge-primary">Yoga</span></td>
                             <td>15/01/2024</td>
@@ -105,61 +141,8 @@
                                     <i class="fas fa-trash"></i> Supprimer
                                 </a>
                             </td>
-                        </tr>
+                        </tr> -->
                         
-                        <tr>
-                            <td>CrossFit Intense</td>
-                            <td><span class="badge badge-primary">CrossFit</span></td>
-                            <td>15/01/2024</td>
-                            <td>12:00</td>
-                            <td>45 min</td>
-                            <td>15</td>
-                            <td>12 (80%)</td>
-                            <td class="actions">
-                                <a href="edit_cours.php?id=2" class="action-btn edit">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a>
-                                <a href="delete_cours.php?id=2" class="action-btn delete">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </a>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td>Musculation Dos</td>
-                            <td><span class="badge badge-primary">Musculation</span></td>
-                            <td>16/01/2024</td>
-                            <td>18:30</td>
-                            <td>90 min</td>
-                            <td>10</td>
-                            <td>8 (80%)</td>
-                            <td class="actions">
-                                <a href="edit_cours.php?id=3" class="action-btn edit">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a>
-                                <a href="delete_cours.php?id=3" class="action-btn delete">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </a>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td>Cardio Training</td>
-                            <td><span class="badge badge-primary">Cardio</span></td>
-                            <td>16/01/2024</td>
-                            <td>19:00</td>
-                            <td>60 min</td>
-                            <td>25</td>
-                            <td>22 (88%)</td>
-                            <td class="actions">
-                                <a href="edit_cours.php?id=4" class="action-btn edit">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a>
-                                <a href="delete_cours.php?id=4" class="action-btn delete">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </a>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 
