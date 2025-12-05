@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un cours - SportFit Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="dashboard.php" class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>SportFit Manager</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="cours.php" class="active"><i class="fas fa-calendar-alt"></i> Cours</a></li>
+                        <li><a href="equipements.php"><i class="fas fa-dumbbell"></i> Équipements</a></li>
+                        <li><a href="associations.php"><i class="fas fa-link"></i> Associations</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="avatar">AD</div>
+                        <span>Admin</span>
+                    </div>
+                    <a href="logout.php" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="page-title">
+                <h1><i class="fas fa-calendar-plus"></i> Ajouter un nouveau cours</h1>
+                <a href="cours.php" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+            
+            <div class="form-container">
+                <form action="save_cours.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom du cours *</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="categorie">Catégorie *</label>
+                            <select id="categorie" name="categorie" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Musculation">Musculation</option>
+                                <option value="Cardio">Cardio</option>
+                                <option value="Pilates">Pilates</option>
+                                <option value="CrossFit">CrossFit</option>
+                                <option value="Zumba">Zumba</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date *</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="heure">Heure *</label>
+                            <input type="time" id="heure" name="heure" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="duree">Durée (minutes) *</label>
+                            <input type="number" id="duree" name="duree" min="15" max="180" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="max_participants">Participants maximum *</label>
+                            <input type="number" id="max_participants" name="max_participants" min="1" max="50" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" placeholder="Description du cours..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='cours.php'">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>SportFit Manager</span>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 SportFit Manager. Tous droits réservés.
+                </div>
+                <div>
+                    <a href="#"><i class="fas fa-question-circle"></i> Aide</a>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

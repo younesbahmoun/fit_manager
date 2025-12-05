@@ -1,0 +1,258 @@
+<?php
+require "connection.php";
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SportFit Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="dashboard.php" class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>SportFit Manager</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="dashboard.php" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="cours.php"><i class="fas fa-calendar-alt"></i> Cours</a></li>
+                        <li><a href="equipements.php"><i class="fas fa-dumbbell"></i> Équipements</a></li>
+                        <li><a href="associations.php"><i class="fas fa-link"></i> Associations</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <div class="avatar">AD</div>
+                        <span>Admin</span>
+                    </div>
+                    <a href="logout.php" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <div class="page-title">
+                <h1><i class="fas fa-tachometer-alt"></i>Tableau de bord</h1>
+                <div class="export-buttons">
+                    <a href="export.php?type=pdf" class="btn btn-outline">
+                        <i class="fas fa-file-pdf"></i> Exporter PDF
+                    </a>
+                    <a href="export.php?type=csv" class="btn btn-outline">
+                        <i class="fas fa-file-csv"></i> Exporter CSV
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="dashboard">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #4361ee;">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>
+                            <?php
+                            $sql = "SELECT COUNT(*) AS total FROM cours";
+                            $result = $connection->query($sql);
+
+                            if (!$result) {
+                                $errorMessage = "Invalid query: " . $connection->error;
+                                exit;
+                            }
+
+                            $row = $result->fetch_assoc(); // la meilleure méthode
+                            $total = $row["total"];        // récupérer la valeur
+
+                            echo $total; // afficher ou utiliser la valeur
+                            ?>
+                        </h3>
+                        <p>Cours programmés</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #7209b7;">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>
+                            <?php
+                            $sql = "SELECT COUNT(*) AS total FROM equipements";
+                            $result = $connection->query($sql);
+
+                            if (!$result) {
+                                $errorMessage = "Invalid query: " . $connection->error;
+                                exit;
+                            }
+
+                            $row = $result->fetch_assoc(); // la meilleure méthode
+                            $total = $row["total"];        // récupérer la valeur
+
+                            echo $total; // afficher ou utiliser la valeur
+                            ?>
+                        </h3>
+                        <p>Équipements disponibles</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #4cc9f0;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>45</h3>
+                        <p>Participants aujourd'hui</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #f8961e;">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>94%</h3>
+                        <p>Équipements fonctionnels</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-pie"></i> Répartition des cours par type</h3>
+                    <div class="chart-placeholder">
+                        <div class="chart-visual">
+                            <div class="pie-chart-visual">
+                                <div class="pie-slice" style="background-color: #4361ee; transform: rotate(0deg);"></div>
+                                <div class="pie-slice" style="background-color: #7209b7; transform: rotate(126deg);"></div>
+                                <div class="pie-slice" style="background-color: #4cc9f0; transform: rotate(252deg);"></div>
+                                <div class="pie-slice" style="background-color: #f8961e; transform: rotate(324deg);"></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #4361ee;"></span>
+                                    <span>Yoga (35%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #7209b7;"></span>
+                                    <span>Musculation (40%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #4cc9f0;"></span>
+                                    <span>Cardio (15%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #f8961e;"></span>
+                                    <span>Pilates (10%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-bar"></i> Répartition des équipements par type</h3>
+                    <div class="chart-placeholder">
+                        <div class="bar-chart-visual">
+                            <div class="bar-chart-item">
+                                <div class="bar-label">Cardio</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 65%; background-color: #4361ee;"></div>
+                                </div>
+                                <div class="bar-value">65%</div>
+                            </div>
+                            <div class="bar-chart-item">
+                                <div class="bar-label">Musculation</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 45%; background-color: #7209b7;"></div>
+                                </div>
+                                <div class="bar-value">45%</div>
+                            </div>
+                            <div class="bar-chart-item">
+                                <div class="bar-label">Accessoires</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 30%; background-color: #4cc9f0;"></div>
+                                </div>
+                                <div class="bar-value">30%</div>
+                            </div>
+                            <div class="bar-chart-item">
+                                <div class="bar-label">Poids</div>
+                                <div class="bar-container">
+                                    <div class="bar" style="width: 50%; background-color: #f8961e;"></div>
+                                </div>
+                                <div class="bar-value">50%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activities -->
+            <div class="recent-activities">
+                <h3><i class="fas fa-history"></i> Activités récentes</h3>
+                <div class="activities-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-plus-circle" style="color: #4361ee;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Nouveau cours ajouté</strong> - Yoga du matin à 8h</p>
+                            <small class="text-muted">Il y a 2 heures</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-tools" style="color: #f8961e;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Équipement en maintenance</strong> - Tapis de course #3</p>
+                            <small class="text-muted">Il y a 5 heures</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-link" style="color: #4cc9f0;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Association mise à jour</strong> - Cours de CrossFit</p>
+                            <small class="text-muted">Hier à 16:30</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>SportFit Manager</span>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 SportFit Manager. Tous droits réservés.
+                </div>
+                <div>
+                    <a href="#"><i class="fas fa-question-circle"></i> Aide</a>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
