@@ -1,3 +1,7 @@
+
+<?php
+require "../connection.php"
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un cours - SportFit Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
@@ -48,7 +52,11 @@
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i>
                 <div>
-                    <strong>Modification en cours</strong> - Vous modifiez le cours "Yoga Matinal"
+                <!-- 
+                    fdkdkfofdkodkodkgodkfo
+                    dfodjodjojdofjdojllllk
+                -->
+                    <strong>Modification en cours</strong> - Vous modifiez le cours "<span>Yoga Matinal</span>"
                 </div>
             </div>
             

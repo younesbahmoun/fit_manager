@@ -1,15 +1,17 @@
 <?php
-require "connection.php";
+require "../connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Cours - SportFit Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -38,7 +40,7 @@ require "connection.php";
             </div>
         </div>
     </header>
-    
+
     <main>
         <div class="container">
             <div class="page-title">
@@ -47,7 +49,7 @@ require "connection.php";
                     <i class="fas fa-plus"></i> Nouveau cours
                 </a>
             </div>
-            
+
             <!-- Messages d'alerte (seront remplis par PHP) -->
             <div class="alert alert-success" style="display: none;">
                 <i class="fas fa-check-circle"></i>
@@ -55,7 +57,7 @@ require "connection.php";
                     <strong>Succès !</strong> Cours ajouté avec succès.
                 </div>
             </div>
-            
+
             <!-- Tableau des cours -->
             <div class="table-container">
                 <div class="table-header">
@@ -76,7 +78,7 @@ require "connection.php";
                         </select>
                     </div>
                 </div>
-                
+
                 <table>
                     <thead>
                         <tr>
@@ -91,7 +93,6 @@ require "connection.php";
                         </tr>
                     </thead>
                     <tbody>
-
                         <?php
                         $sql = "SELECT * FROM cours";
                         $result = $connection->query($sql);
@@ -107,15 +108,15 @@ require "connection.php";
                                     <td>$row[nom]</td>
                                     <td><span class='badge badge-primary'>$row[categorie]</span></td>
                                     <td>$row[date_cours]</td>
-                                    <td>08:00</td>
-                                    <td>$row[duree] min</td>
-                                    <td>$row[max_participants]</td>
+                                    <td>$row[heure]</td>
+                                    <td>$row[duree_minutes] min</td>
+                                    <td>$row[nb_max_participants]</td>
                                     <td>15 (75%)</td>
                                     <td class='actions'>
                                         <a href='edit_cours.php?id=1' class='action-btn edit'>
                                             <i class='fas fa-edit'></i> Modifier
                                         </a>
-                                        <a href='delete_cours.php?id=1' class='action-btn delete'>
+                                        <a href='delete_cours.php?id=$row[cours_id]' class='action-btn delete'>
                                             <i class='fas fa-trash'></i> Supprimer
                                         </a>
                                     </td>
@@ -123,29 +124,9 @@ require "connection.php";
                             ";
                         }
                         ?>
-
-                        <!-- Exemple de données statiques -->
-                        <!-- <tr>
-                            <td>Yoga Matinal</td>
-                            <td><span class="badge badge-primary">Yoga</span></td>
-                            <td>15/01/2024</td>
-                            <td>08:00</td>
-                            <td>60 min</td>
-                            <td>20</td>
-                            <td>15 (75%)</td>
-                            <td class="actions">
-                                <a href="edit_cours.php?id=1" class="action-btn edit">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a>
-                                <a href="delete_cours.php?id=1" class="action-btn delete">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </a>
-                            </td>
-                        </tr> -->
-                        
                     </tbody>
                 </table>
-                
+
                 <!-- Pagination -->
                 <div class="pagination">
                     <a href="#" class="prev"><i class="fas fa-chevron-left"></i> Précédent</a>
@@ -159,7 +140,7 @@ require "connection.php";
             </div>
         </div>
     </main>
-    
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -178,4 +159,5 @@ require "connection.php";
         </div>
     </footer>
 </body>
+
 </html>
